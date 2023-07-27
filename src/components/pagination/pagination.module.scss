@@ -1,0 +1,65 @@
+.root {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pageBtn {
+  all: unset;
+  cursor: pointer;
+  padding: 0 8px;
+  border-radius: 2px;
+
+  &.selected {
+    color: var(--color-dark-900);
+    background-color: var(--color-light-100);
+  }
+
+  &:active {
+    color: var(--color-dark-900);
+    background-color: var(--color-light-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-700);
+  }
+
+  &:disabled {
+    cursor: auto;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-dark-500);
+  }
+}
+
+.navigationBtn {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  &:disabled {
+    cursor: auto;
+    color: var(--color-dark-100);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-info-700);
+  }
+}
+
+.dots {
+  margin-bottom: 6px;
+  padding: 0 8px;
+}
+
+.selectBox {
+  display: flex;
+  gap: 6px;
+  margin-left: 18px;
+}
+
+select {
+  color: #000;
+}
