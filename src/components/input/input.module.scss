@@ -1,0 +1,39 @@
+
+.root {
+  position: relative;
+  margin-right: 15px;
+  width: 59%;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+.input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 12px;
+  background-color: var(--color-dark-300);
+  outline: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #B2B7BF;
+  &::placeholder {
+    font-size: 14px;
+    font-weight: var(--font-weight-regular);
+    color: #b2b7bf;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+.iconPlaceholder {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
