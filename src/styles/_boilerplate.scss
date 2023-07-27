@@ -1,0 +1,55 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+select,
+textarea,
+optgroup,
+option {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: var(--font-weight-regular);
+  line-height: 137.687%;
+  font-size: 13px;
+  color: var(--main-color) ;
+
+  //background-color: var(--color-light-100);
+}
+.App {
+
+}
+
+.icon-placeholder {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
