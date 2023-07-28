@@ -7,10 +7,11 @@ type PropsType = {
     placeholder: string;
     children?: ReactNode;
     className?: string
+    initValue?: string
 };
 
-export const Input: FC<PropsType> = ({onChange, placeholder, children, className}) => {
-    const [value, setValue] = useState<string>("");
+export const Input: FC<PropsType> = ({onChange, placeholder, children, className,initValue = '' }) => {
+    const [value, setValue] = useState<string>(initValue);
     const [timerId, setTimerId] = useState<number | null>(null);
 
     const onSetValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +28,12 @@ export const Input: FC<PropsType> = ({onChange, placeholder, children, className
             }, 1000),
         );
     }, [value]);
+
+
+    useEffect(() => {
+      setValue(initValue)
+    }, [initValue]);
+
 
     return (
         <div className={clsx(s.root, className)}>

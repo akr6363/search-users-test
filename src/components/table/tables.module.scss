@@ -1,18 +1,50 @@
-.table {
-  border-collapse: collapse;
-  width: 100%;
-  thead {
-    background-color: var(--color-dark-500);
+
+.container {
+  height: 80vh;
+  position: relative;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  border-bottom: 1px solid var(--color-dark-300);
+  color: var(--color-dark-500);
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+    transition: background 0.3s ease-in-out;
   }
 
-  th {
-    padding: 12px 24px;
+  &::-webkit-scrollbar-thumb {
+    transition: background 0.3s ease-in-out;
   }
 
-  td {
-    padding: 6px 24px;
-    border: 1px solid var(--color-dark-500);
-   text-align: center;
+  &:hover::-webkit-scrollbar-thumb { // добавляем стили только когда курсор находится на контейнере
+    background: rgba(121, 121, 121, 1);
+    transition: background 0.3s ease;
+  }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    border-bottom: none;
+    thead {
+      background-color: var(--color-dark-300);
+      color: var(--color-light);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th {
+      padding: 12px 24px;
+      font-weight: 500;
+      width: auto;
+    }
+
+    td {
+      padding: 6px 24px;
+      border: 1px solid var(--color-dark-500);
+      text-align: center;
+    }
   }
 }
 
@@ -32,5 +64,41 @@
     display: block;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+.empty {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  color: var(--gray-color);
+  display: flex;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+.link {
+  &:hover {
+    color: var(--color-active)
+  }
+}
+
+.showBTn {
+  all: unset;
+  background-color: var(--color-dark-300);
+  padding: 10px 15px;
+  color: var(--color-light);
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:active {
+    background-color: var(--color-active)
   }
 }

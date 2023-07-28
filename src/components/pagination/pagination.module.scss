@@ -2,34 +2,36 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  color: var(--color-dark-700);
+  font-weight: var(--);
 }
 
 .pageBtn {
   all: unset;
   cursor: pointer;
-  padding: 0 8px;
+  padding: 5px 8px;
   border-radius: 2px;
 
-  &.selected {
-    color: var(--color-dark-900);
-    background-color: var(--color-light-100);
-  }
 
-  &:active {
-    color: var(--color-dark-900);
-    background-color: var(--color-light-100);
+  &.selected {
+    color: var(--color-light);
+    background-color: var(--color-dark-300);
   }
 
   &:focus {
-    outline: 2px solid var(--color-info-700);
+    outline: 2px solid var(--color-active);
   }
 
   &:disabled {
     cursor: auto;
   }
 
-  &:hover:not(:disabled) {
-    background-color: var(--color-dark-500);
+  &:hover:not(:disabled):not(:active) {
+    background-color: var(--color-dark-100);
+  }
+
+  &:active {
+    background-color: var(--color-active);
   }
 }
 
@@ -45,7 +47,7 @@
   }
 
   &:focus {
-    outline: 2px solid var(--color-info-700);
+    outline: 2px solid var(--color-active);
   }
 }
 
@@ -57,7 +59,11 @@
 .selectBox {
   display: flex;
   gap: 6px;
+  align-items: center;
   margin-left: 18px;
+  span {
+    display: block;
+  }
 }
 
 select {

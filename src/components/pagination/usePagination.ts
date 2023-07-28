@@ -32,8 +32,8 @@ export const usePagination = ({ siblings = 1, count, page, onChange }: ParamType
     //  2: Показываются только правые точки
     if (!shouldShowLeftDots && shouldShowRightDots) {
       // кол-во страниц до точек = totalPageNumbers - dots - lastPage
-      let leftItemCount = totalPageNumbers - 2
-      let leftRange = range(1, leftItemCount)
+      const leftItemCount = totalPageNumbers - 2
+      const leftRange = range(1, leftItemCount)
 
       return [...leftRange, DOTS, lastPageIndex]
     }
@@ -41,15 +41,15 @@ export const usePagination = ({ siblings = 1, count, page, onChange }: ParamType
     //  3: Показываются только левые точки
     if (shouldShowLeftDots && !shouldShowRightDots) {
       // кол-во страниц после точек = totalPageNumbers - dots - lastPage
-      let rightItemCount = totalPageNumbers - 2
-      let rightRange = range(count - rightItemCount + 1, count)
+      const rightItemCount = totalPageNumbers - 2
+      const rightRange = range(count - rightItemCount + 1, count)
 
       return [firstPageIndex, DOTS, ...rightRange]
     }
 
     //  4: Показываются точки слева и справа
     if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(page - siblings, page + siblings)
+      const middleRange = range(page - siblings, page + siblings)
 
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
     }
@@ -79,7 +79,7 @@ export const usePagination = ({ siblings = 1, count, page, onChange }: ParamType
 }
 
 const range = (start: number, end: number) => {
-  let length = end - start + 1
+  const length = end - start + 1
 
   // создаем массив элементов длиной length начиная с элемента start
   return Array.from({ length }, (_, idx) => idx + start)

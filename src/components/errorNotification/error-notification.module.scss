@@ -1,0 +1,25 @@
+.container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 90vh;
+  z-index: 100;
+  background-color: red;
+  display: flex;
+  padding: 10px 20px;
+  .error {
+    color: #fff;
+    font-weight: var(--font-weight-bold);
+  }
+  .closeBtn {
+    all: unset;
+    padding-left: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    &:hover {
+      color: var(--gray-color);
+      transition: color 0.3s ease-in-out;
+    }
+  }
+}

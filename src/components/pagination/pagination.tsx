@@ -1,157 +1,160 @@
-import { FC, memo } from 'react'
+import {FC, memo} from 'react'
 
-import { clsx } from 'clsx'
+import {clsx} from 'clsx'
 
-
-import { Select } from '../select'
-
+import {Select} from '../select'
 
 import s from './pagination.module.scss'
-import { usePagination } from './usePagination.ts'
-import {ArrowBack} from "../../assets/icons/components/ArrowBack.tsx";
-import {ArrowForward} from "../../assets/icons/components/ArrowForward.tsx";
-import {useAppDispatch, useAppSelector} from "../../common/hooks";
-import {usersActions} from "../Posts/posts-reducer.ts";
+import {usePagination} from './usePagination.ts'
+import {ArrowBack} from "../../assets/icons/components";
+import {ArrowForward} from "../../assets/icons/components";
+import {useAppSelector} from "../../common/hooks";
 
-export const Pagination: FC<PaginationProps> = ({
-  siblings = 1,
-}) => {
-  const totalCount = useAppSelector((state) => state.users.totalCount);
-  const pageSize = useAppSelector((state) => state.users.pageSize);
-  const page = useAppSelector((state) => state.users.currentPage);
-  const count = Math.ceil(totalCount / pageSize); //общее число страниц
+import {useSearchParams} from "react-router-dom";
 
-  const dispatch = useAppDispatch()
-  const onPageChange = (page: number) => {
-    dispatch(usersActions.setCurrentPage({currentPage: page}))
-  }
-  const onChangePageSize = (pageSize: string) => {
-    dispatch(usersActions.setPageSize({pageSize: Number(pageSize)}))
-  }
-  const {
-    paginationRange,
-    handlePreviousPageClicked,
-    handleNextPageClicked,
-    handleMainPageClicked,
-  } = usePagination({
-    page,
-    count,
-    onChange: onPageChange,
-    siblings,
-  })
+export const Pagination: FC<PaginationProps> = ({siblings = 1, params}) => {
+    const totalCount = useAppSelector((state) => state.users.totalCount);
+    const {page, pageSize} = useAppSelector((state) => state.users.searchParams);
+    const count = Math.ceil(totalCount / Number(pageSize)); //общее число страниц
 
-const selectOptions=['10', '20', '30', '50', '100']
+    const [searchParams, setSearchParams] =
+        useSearchParams(params.get('pageSize') ? params : {...params, pageSize: pageSize.toString()})
 
-  return (
-    <div className={s.root}>
-      <PrevButton onClick={handlePreviousPageClicked} disabled={page === 1} />
-      <MainPaginationButtons
-        currentPage={page}
-        onClick={handleMainPageClicked}
-        paginationRange={paginationRange}
-      />
-      <NextButton onClick={handleNextPageClicked} disabled={page === count} />
-      <ShowOnPageSelect
-        selectOptions={selectOptions}
-        selectCurrent={pageSize.toString()}
-        onSelectChange={onChangePageSize}
-      />
-    </div>
-  )
+    const onPageChange = (page: number) => {
+        searchParams.set('page', page.toString())
+        setSearchParams(searchParams)
+    }
+    const onChangePageSize = (pageSize: string) => {
+        searchParams.set('pageSize', pageSize)
+        setSearchParams(searchParams)
+    }
+    const {
+        paginationRange,
+        handlePreviousPageClicked,
+        handleNextPageClicked,
+        handleMainPageClicked,
+    } = usePagination({
+        page,
+        count,
+        onChange: onPageChange,
+        siblings,
+    })
+
+    const selectOptions = ['10', '20', '30', '50', '100']
+
+    return (
+        <div className={s.root}>
+            <PrevButton onClick={handlePreviousPageClicked} disabled={page === 1}/>
+            <MainPaginationButtons
+                currentPage={page}
+                onClick={handleMainPageClicked}
+                paginationRange={paginationRange}
+            />
+            <NextButton onClick={handleNextPageClicked} disabled={page === count}/>
+            <ShowOnPageSelect
+                selectOptions={selectOptions}
+                selectCurrent={pageSize.toString()}
+                onSelectChange={onChangePageSize}
+            />
+        </div>
+    )
 }
-const MainPaginationButtons: FC<MainPaginationButtonsProps> = ({
-  paginationRange,
-  currentPage,
-  onClick,
-}) => {
-  return (
-    <>
-      {paginationRange.map((page: number | string, index) => {
-        const isSelected = page === currentPage
+const MainPaginationButtons: FC<MainPaginationButtonsProps> = (
+    {
+        paginationRange,
+        currentPage,
+        onClick,
+    }) => {
+    return (
+        <>
+            {paginationRange.map((page: number | string, index) => {
+                const isSelected = page === currentPage
 
-        if (typeof page !== 'number') {
-          return <Dots key={index} />
-        }
+                if (typeof page !== 'number') {
+                    return <Dots key={index}/>
+                }
 
-        return <PageButton key={index} page={page} selected={isSelected} onClick={onClick} />
-      })}
-    </>
-  )
+                return <PageButton key={index} page={page} selected={isSelected} onClick={onClick}/>
+            })}
+        </>
+    )
 }
 
-const PageButton: FC<PageButtonProps> = memo(({ onClick, selected, page }) => {
-  return (
-    <button
-      onClick={() => onClick(page)}
-      className={clsx(s.pageBtn, selected && s.selected)}
-      disabled={selected}
-    >
-      {page}
-    </button>
-  )
+const PageButton: FC<PageButtonProps> = memo(({onClick, selected, page}) => {
+    return (
+        <button
+            onClick={() => onClick(page)}
+            className={clsx(s.pageBtn, selected && s.selected)}
+            disabled={selected}
+        >
+            {page}
+        </button>
+    )
 })
 
-const PrevButton: FC<NavigationButtonProps> = memo(({ onClick, disabled }) => {
-  return (
-    <button className={s.navigationBtn} onClick={onClick} disabled={disabled}>
-      <ArrowBack size={16} color={disabled ? 'var(--color-dark-100)' : 'var(--color-dark-500)'} />
-    </button>
-  )
+const PrevButton: FC<NavigationButtonProps> = memo(({onClick, disabled}) => {
+    return (
+        <button className={s.navigationBtn} onClick={onClick} disabled={disabled}>
+            <ArrowBack size={16} color={disabled ? 'var(--color-dark-100)' : 'var(--color-dark-500)'}/>
+        </button>
+    )
 })
 
-const NextButton: FC<NavigationButtonProps> = memo(({ onClick, disabled }) => {
-  return (
-    <button className={s.navigationBtn} onClick={onClick} disabled={disabled}>
-      <ArrowForward size={16} color={disabled ? 'var(--color-dark-100)' : 'var(--color-dark-500)'} />
-    </button>
-  )
+const NextButton: FC<NavigationButtonProps> = memo(({onClick, disabled}) => {
+    return (
+        <button className={s.navigationBtn} onClick={onClick} disabled={disabled}>
+            <ArrowForward size={16} color={disabled ? 'var(--color-dark-100)' : 'var(--color-dark-500)'}/>
+        </button>
+    )
 })
 
 const Dots: FC = () => {
-  return <span className={s.dots}>&#8230;</span>
+    return <span className={s.dots}>&#8230;</span>
 }
 
-export const ShowOnPageSelect: FC<ShowOnPageSelectProps> = ({
-  selectCurrent,
-  selectOptions,
-  onSelectChange,
-}) => {
-  return (
-    <div className={s.selectBox}>
-      <p>Показать</p>
-      <Select
-        selectCurrent={selectCurrent}
-        onSelectChange={onSelectChange}
-        selectOptions={selectOptions}
-        className={'pagination'}
-      />
-      <p>на странице</p>
-    </div>
-  )
+export const ShowOnPageSelect: FC<ShowOnPageSelectProps> = (
+    {
+        selectCurrent,
+        selectOptions,
+        onSelectChange,
+    }) => {
+    return (
+        <div className={s.selectBox}>
+            <span>Показать</span>
+            <Select
+                selectCurrent={selectCurrent}
+                onSelectChange={onSelectChange}
+                selectOptions={selectOptions}
+                className={'pagination'}
+            />
+            <span>на странице</span>
+        </div>
+    )
 }
 
 //types
 export type ShowOnPageSelectProps = {
-  selectCurrent: string
-  selectOptions: string[]
-  onSelectChange?: (item: string) => void
+    selectCurrent: string
+    selectOptions: string[]
+    onSelectChange?: (item: string) => void
 }
 export type PaginationProps = {
-  siblings?: number //кол-во сосендих отображаемых стр от текущей
+    params: URLSearchParams
+    siblings?: number //кол-во сосендих отображаемых стр от текущей
 }
 
 type MainPaginationButtonsProps = {
-  paginationRange: (number | string)[]
-  currentPage: number
-  onClick: (pageNumber: number) => void
+    paginationRange: (number | string)[]
+    currentPage: number
+    onClick: (pageNumber: number) => void
 }
 
 type NavigationButtonProps = {
-  onClick: () => void
-  disabled?: boolean
+    onClick: () => void
+    disabled?: boolean
 }
 type PageButtonProps = {
-  onClick: (pageNumber: number) => void
-  page: number
-  selected: boolean
+    onClick: (pageNumber: number) => void
+    page: number
+    selected: boolean
 }

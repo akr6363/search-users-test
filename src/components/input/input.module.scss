@@ -16,15 +16,18 @@
   border: none;
   font-size: 14px;
   font-weight: 400;
-  color: #B2B7BF;
+  color: var(--color-light);
   &::placeholder {
     font-size: 14px;
     font-weight: var(--font-weight-regular);
-    color: #b2b7bf;
+    color: var(--color-dark-100);
   }
 
   &:focus::placeholder {
     color: transparent;
+  }
+  &:hover {
+    background-color: var(--color-dark-500);
   }
 }
 
