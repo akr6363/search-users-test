@@ -8,8 +8,9 @@
 //   SortKeyType,
 // } from "../posts-reducer";
 // import { PostType } from "components/Posts/posts-api";
-//
+// import { beforeEach } from 'jest';
 // let initialState: InitialStateType;
+//
 // beforeEach(() => {
 //   initialState = {
 //     posts: [],
@@ -69,4 +70,4 @@
 //   const newState = postsReducer(initialState, postsActions.setError({ error: "some error" }));
 //   expect(newState.error).toEqual("some error");
 // });
-export {};
+// export {};
