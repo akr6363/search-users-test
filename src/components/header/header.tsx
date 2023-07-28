@@ -11,18 +11,13 @@ export const Header: FC<HeaderProps> = ({params}) => {
 
     const dispatch = useAppDispatch()
     const {searchValue} = useAppSelector((state) => state.users.searchParams);
-    const [searchParams, setSearchParams] = useSearchParams(params.get('pageSize') ? params : {
-        q: '',
-        pageSize: '30',
-        page: ''
-    })
+    const [_, setSearchParams] =
+        useSearchParams(params.get('pageSize') ? params : {q: '', pageSize: '', page: ''})
     const navigate = useNavigate();
     const SearchPosts = (value: string) => {
         if (searchValue === value) return
         if (value) {
-            searchParams.set('page', '1')
-            searchParams.set('q', value)
-            setSearchParams(searchParams)
+            setSearchParams({q: value, pageSize: '30', page: '1'})
         } else {
             navigate(`/`)
         }
