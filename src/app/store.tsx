@@ -19,5 +19,4 @@ export type AppRootStateType = ReturnType<typeof store.getState>;
 export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>;
-// @ts-ignore
-window.store = store;
+
