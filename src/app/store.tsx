@@ -3,7 +3,7 @@ import { AnyAction, combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import {usersReducer} from "../model/users/users-slice.ts";
-import {appReducer} from "../model/app/users-slice.ts";
+import {appReducer} from "../model/app/app-slice.ts";
 
 const rootReducer = combineReducers({
   users: usersReducer,

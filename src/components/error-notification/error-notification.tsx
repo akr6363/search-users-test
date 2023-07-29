@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {useAppSelector} from "../../common/hooks";
 import s from './error-notification.module.scss'
-import {appActions} from "../../model/app/users-slice.ts";
+import {appActions} from "../../model/app/app-slice.ts";
 
 export const ErrorNotification = () => {
   const error = useAppSelector((state) => state.app.error);

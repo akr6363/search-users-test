@@ -1,7 +1,7 @@
 import { Dispatch } from "redux";
 
 import axios, { AxiosError } from "axios";
-import {appActions} from "../../model/app/users-slice.ts";
+import {appActions} from "../../model/app/app-slice.ts";
 
 
 export const handleServerNetworkError = (e: unknown, dispatch: Dispatch) => {

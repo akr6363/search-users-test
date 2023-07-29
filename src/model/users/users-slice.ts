@@ -2,7 +2,7 @@ import {UserInfoType, usersApi, UserType} from "./users-api.ts";
 
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {createAppAsyncThunk, handleServerNetworkError} from "../../common/utils";
-import {appActions} from "../app/users-slice.ts";
+import {appActions} from "../app/app-slice.ts";
 
 const initialState: InitialStateType = {
     users: [],
