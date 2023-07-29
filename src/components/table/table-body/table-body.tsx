@@ -51,10 +51,17 @@ const Row: FC<RowProps> = ({user, onModalOpen}) => {
             </td>
             <td>{user.login}</td>
             <td>
-                <a href={user.html_url} target={'_blank'} className={s.link}>{user.html_url}</a>
+                <a href={user.html_url} target={'_blank'} className={s.link}>
+                    <span className={s.icon}>link</span>
+                    <span className={s.url}>{user.html_url}</span>
+                </a>
+
             </td>
             <td>
-                <button onClick={onShowInfo} className={s.showBTn}>Show info</button>
+                <button onClick={onShowInfo} className={s.showBTn}>
+                    <span className={s.show}>Show </span>
+                    <span className={s.info}>info</span>
+                </button>
             </td>
         </tr>
     )

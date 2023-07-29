@@ -41,6 +41,7 @@ body {
 }
 .app {
   position: relative;
+  height: 100vh;
 }
 
 .container {
@@ -48,5 +49,10 @@ body {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 20px;
-  height: 90vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  @media(max-width: 576px) {
+    padding: 10px;
+  }
 }

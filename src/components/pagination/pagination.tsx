@@ -44,18 +44,22 @@ export const Pagination: FC<PaginationProps> = ({siblings = 1, params}) => {
 
     return (
         <div className={s.root}>
-            <PrevButton onClick={handlePreviousPageClicked} disabled={page === 1}/>
-            <MainPaginationButtons
-                currentPage={page}
-                onClick={handleMainPageClicked}
-                paginationRange={paginationRange}
-            />
-            <NextButton onClick={handleNextPageClicked} disabled={page === count}/>
-            <ShowOnPageSelect
-                selectOptions={selectOptions}
-                selectCurrent={pageSize.toString()}
-                onSelectChange={onChangePageSize}
-            />
+            <div className={s.container}>
+                <PrevButton onClick={handlePreviousPageClicked} disabled={page === 1}/>
+                <MainPaginationButtons
+                    currentPage={page}
+                    onClick={handleMainPageClicked}
+                    paginationRange={paginationRange}
+                />
+                <NextButton onClick={handleNextPageClicked} disabled={page === count}/>
+            </div>
+            <div>
+                <ShowOnPageSelect
+                    selectOptions={selectOptions}
+                    selectCurrent={pageSize.toString()}
+                    onSelectChange={onChangePageSize}
+                />
+            </div>
         </div>
     )
 }

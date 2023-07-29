@@ -1,7 +1,7 @@
 import axios from "axios";
 import {SearchParamsType, SortParamsType} from "./users-slice.ts";
 
-const token = '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'
+const token = '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'
 const axiosInstance = axios.create({
     baseURL: 'https://api.github.com/',
     headers: {
