@@ -1,9 +1,9 @@
 .container {
+  z-index: 150;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: 90vh;
-  z-index: 100;
   background-color: red;
   display: flex;
   padding: 10px 20px;
