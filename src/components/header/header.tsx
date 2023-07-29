@@ -14,7 +14,7 @@ export const Header: FC<HeaderProps> = ({params}) => {
     const [_, setSearchParams] =
         useSearchParams(params.get('pageSize') ? params : {q: '', pageSize: '', page: ''})
     const navigate = useNavigate();
-    const SearchPosts = (value: string) => {
+    const SearchUsers= (value: string) => {
         if (searchValue === value) return
         if (value) {
             setSearchParams({q: value, pageSize: '30', page: '1'})
@@ -44,7 +44,7 @@ export const Header: FC<HeaderProps> = ({params}) => {
 
     return (
         <div className={s.container}>
-            <Input onChange={SearchPosts} placeholder="Поиск" initValue={searchValue}>
+            <Input onChange={SearchUsers} placeholder="Поиск" initValue={searchValue}>
                 <Search color={'var(--color-dark-100)'}/>
             </Input>
             <Select placeholder={"Выберите сортировку"} selectOptions={['asc repositories', 'desc repositories']}

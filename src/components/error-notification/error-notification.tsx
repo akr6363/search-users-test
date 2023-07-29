@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {useAppSelector} from "../../common/hooks";
-import { usersActions} from "../../model/users/users-slice.ts";
-
 import s from './error-notification.module.scss'
+import {appActions} from "../../model/app/users-slice.ts";
+
 export const ErrorNotification = () => {
-  const error = useAppSelector((state) => state.users.error);
+  const error = useAppSelector((state) => state.app.error);
   const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -13,7 +13,7 @@ export const ErrorNotification = () => {
     if (error) {
       setIsVisible(true);
       const timerId = setTimeout(() => {
-        dispatch(usersActions.setError({ error: null }));
+        dispatch(appActions.setError({ error: null }));
         setIsVisible(false);
       }, 3000);
       return () => clearTimeout(timerId);
@@ -21,7 +21,7 @@ export const ErrorNotification = () => {
   }, [error, dispatch]);
 
   const handleClose = () => {
-    dispatch(usersActions.setError({ error: null }));
+    dispatch(appActions.setError({ error: null }));
     setIsVisible(false);
   };
 
